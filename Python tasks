@@ -1,0 +1,90 @@
+1.
+def chek_Palindrome(s):
+    if s == s[::-1]:
+      print("True")
+    else:
+      print("False")
+ 
+ 
+s = input("Enter word:")
+ch = chek_Palindrome(s)
+
+
+3.def Pair_valid(s):
+    pairlst=[]
+    for i in range(len(s)):
+        if i==0 and  s[i]==')':
+            return False
+        elif i==0:
+            pairlst.append(s[i])
+            continue
+        if s[i]=='(':
+            pairlst.append(s[i])
+            continue
+        if len(pairlst)==0: 
+            return False
+        if (s[i]==')' and pairlst[-1]=='('):
+            pairlst.pop()
+            continue
+        return False
+    if len(pairlst)>0: 
+        return False
+    return True
+ 
+print(Pair_valid('()()))'))
+
+
+4.def Stairs_func(n):
+     if n==1: 
+            return 1
+     if n==2: 
+            return 2
+     st=[0 for i in range(n)]
+     st[0]=1
+     st[1]=2
+     for i in range(2,n):
+        st[i]=st[i-1]+st[i-2]
+     return st[n-1]
+
+n = input("Enter stairs numb:")
+n = int(n)
+print(Stairs_func(n))
+
+5.tables
+CREATE TABLE teacher (
+    id SERIAL 
+        UNIQUE 
+        PRIMARY KEY,
+    firstname VARCHAR,
+    lastname VARCHAR,
+    gender VARCHAR,
+    subject VARCHAR
+);
+
+CREATE TABLE pupil (
+    id SERIAL 
+        UNIQUE 
+        PRIMARY KEY,
+    firstname VARCHAR,
+    lastname VARCHAR,
+    gender VARCHAR,
+    class VARCHAR    
+);
+
+CREATE TABLE teachet_to_pupil (
+    id SERIAL 
+        UNIQUE 
+        PRIMARY KEY,
+    teacher_id INTEGER 
+        REFERENCES teacher (id),
+    pupil_id INTEGER 
+        REFERENCES pupil (id)    
+);
+
+--select
+SELECT 
+    t.*, p.firstname 
+FROM teacher t
+INNER JOIN teachet_to_pupil tp ON t.id = tp.teacher_id
+INNER JOIN pupil p ON p.id = tp.pupil_id
+WHERE p.firstname = 'გიორგი'
